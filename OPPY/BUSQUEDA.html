@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPPORTUNITY</title>
+    <link rel="stylesheet" href="./OPPY CSS.css">
+</head>
+<body>
+<div class="BIGdiv">
+<header>
+<div class = headerDiv>
+    <div class = "titleDiv">
+        <div class = "titleImage"><img id="OPP" src="./OPPY NAME.png" alt="*OPPORTUNITY*"></div>
+    </div>
+    <div class = "menuDiv">
+        <div class="Menu">
+            <ul id="MenuList">
+                <li><button class = "pxl-border" id = "inicio"><a href="./INICIO.html">Inicio</a></button></li>
+                <li><button class = "pxl-border" id = "busqueda"><a href="./BUSQUEDA.html">Búsqueda de Imágenes</a></button></li>
+                <li><button class = "pxl-border" id = "favoritos"><a href="./FAVORITOS.html">Imágenes Favoritas</a></button></li>
+                <li><button class = "pxl-border" id = "acerca"><a href="./ACERCA.html">Acerca de "OPPY"</a></button></li>
+            </ul>
+            </div>
+    </div>
+</div>
+</header>
+
+<main>
+<form id = "formulario">
+
+<div class = "mainDiv">
+
+    <div class = "busqueda">
+        <div class = "busquedaBox" id = "selection">
+            <select name="select" id = "selectList">
+                <option value="" selected>( Elige si fecha en la Tierra o sols en Marte: )</option>
+                <option value="earth">Fecha en la tierra</option>
+                <option value="sols">Sols en Marte</option></select>
+        </div>
+        <div class = "busquedaBox" id = "earthSelect">
+            <label for="start">Elige una fecha:</label>
+            <input type="date" id="date" name="date"
+               value="2004-01-25"
+               min="2004-01-25" max="2018-06-11">
+        </div>
+        <div class = "busquedaBox" id = "solsSelect">
+            <label for="quantity">Elige un número (entre 1 y 5111):</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="5111">  
+        </div>
+        <div class = "busquedaBox" id = "camaraSelect">Elige una cámara:
+            <br><br><input type="radio" name="camara" class="rad" id="FHAZ" value="fhaz">
+            <label for="">FHAZ - Front Hazard Avoidance Camera</label><br>
+            
+            <input type="radio" name="camara" class="rad" id="RHAZ" value="rhaz">
+            <label for="">RHAZ - Rear Hazard Avoidance Camera</label><br>
+            
+            <input type="radio" name="camara" class="rad" id="NAVCAM" value="navcam">
+            <label for="">NAVCAM - Navigation Camera</label><br>
+            
+            <input type="radio" name="camara" class="rad" id="PANCAM" value="pancam">
+            <label for="">PANCAM - Panoramic Camera</label><br>
+            
+            <input type="radio" name="camara" class="rad" id="MINITES" value="minites">
+            <label for="">MINITES - Miniature Thermal Emission Spectrometer</label>
+        </div>
+        <div class = "busquedaBox" id = "confirm"><button class = "pxl-border" id = "confirmButton"><input id="input" type="submit" value="Confirmar selección"></button></div>
+        <div id = "addFav">Para agregar una imagen a tus favoritos haz doble click sobre ella.</div>
+        <div id="div"></div>
+    </div>
+</div>
+
+</form>
+</main>
+
+<footer>
+
+<div class = "footerDiv">
+
+    <div class = "halvesDiv">
+        <div class = "logoDiv">
+            <div class = "logoImage"><img id = "logoImage" src="./yfl3inc3lpw21 copy.png" alt = "*NASA LOGO*"></div>
+        </div>
+    </div>
+    <div class = halvesDiv>
+        <div id = footerText> Todas las imágenes de la búsqueda son obtenidas a través del portal API de la NASA.
+            <p> </p>
+            <p>Para más información y más bases de datos puedes consultar: https://api.nasa.gov/</p> </div>
+    </div>
+</div>
+
+</footer>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="BUSQUEDA.json"></script>
+
+</body>
+</html>
+</body>
+</html>

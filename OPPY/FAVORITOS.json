@@ -1,0 +1,22 @@
+let localSTG = JSON.parse(localStorage.getItem("favGallery"))
+
+
+
+if (localSTG == null) 
+{
+    document.getElementById("favsDisplay").innerHTML = "Realiza una búsqueda y selecciona imágenes para agregarlas a favoritos."
+    
+} 
+
+else 
+{ 
+    
+
+    for (let i = 0; i < localSTG.length; i++) 
+    {   
+        let favImage = localSTG[i]
+        let displayFav = document.createElement("img")
+        displayFav.src = favImage
+        document.getElementById("favsDisplay").appendChild(displayFav)
+    }
+}

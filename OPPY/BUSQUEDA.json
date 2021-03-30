@@ -1,0 +1,141 @@
+hide()
+
+
+let urlBase = "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?"
+let earthIndex = "earth_date="
+let marsIndex = "sol="
+let camIndex = "&camera="
+let apiKey = "&api_key=g6MCgllfLUIqGWHob4DGJgWIL3LOzrILCrqQCMiH"
+let urlTotal = ""
+
+
+
+document.querySelector("#formulario").addEventListener("submit", function (e)
+{ 
+    e.preventDefault();
+    let selection = document.querySelector("#selectList").value;
+    let dateEarth = document.querySelector("#date").value;
+    let numberSols = document.querySelector("#quantity").value;
+    let camType = getRadioVal()
+
+
+    if (selection == "earth")  
+    {selection = earthIndex + dateEarth}
+    else {selection = marsIndex + numberSols}
+
+    urlTotal = urlBase + selection + camIndex + camType + apiKey
+    console.log(urlTotal);
+    console.log(dateEarth);
+
+    getApi(urlTotal)
+    hide()
+})
+
+function getRadioVal() 
+{
+    let form = document.querySelector("form")
+    var val;
+    var radios = form.elements["camara"];
+    
+    for (let i = 0; i < radios.length; i++)
+    {
+        if ( radios[i].checked ) 
+        {
+            val = radios[i].value;
+            break;
+        }
+    }
+        return val;
+}
+
+
+function getApi (urlTotal)
+{        axios.get(urlTotal)
+            .then(function (response) {
+
+                if (response.status !== 200) {
+                alert("*************** \n OOPS! \n Hubo un error técnico. \n Refresca la página y repite tu búsqueda. \n ***************")}
+            
+                document.getElementById("div").innerHTML = ""
+
+                if (response.data.photos.length === 0) {alert("*************** \n OOPS! \n No hay imágenes para tu selección. \n ***************")}
+                else {
+                        for (let i = 0; i < response.data.photos.length; i++) 
+                        { 
+                            spacePic = response.data.photos[i].img_src;
+                            let div = document.getElementById("div")
+                            div.innerHTML += "<img src="+spacePic+" class='imageClass'>"
+
+                        }
+                    }
+                    let imageClass = document.querySelectorAll(".imageClass")
+
+                    for (let z = 0; z < imageClass.length; z++) {
+                        imageClass[z].addEventListener("click", function () {
+                                let urlImage = this.src
+                                let favGallery = []
+                                if (localStorage.getItem("favGallery")) {
+                                    favGallery = localStorage.getItem("favGallery")
+                                    favGallery = JSON.parse(favGallery)
+
+                                    if (!favGallery.includes(urlImage)) {favGallery.push(urlImage)}
+                                } 
+                                else {favGallery = [urlImage]
+                                
+                                }
+
+                                favGallery = JSON.stringify(favGallery)
+                                localStorage.setItem("favGallery", favGallery)
+                                alert("Agregado a favoritos.")
+                            })
+                        
+                    }
+            })
+}
+
+
+function hide() {
+    document.querySelector("#selectList").value = ""
+    document.querySelector("#camaraSelect").value = ""
+    document.querySelector("#earthSelect").style.display = "none"
+    document.querySelector("#solsSelect").style.display = "none"
+    document.querySelector("#camaraSelect").style.display = "none"
+    document.querySelector("#confirm").style.display = "none"
+    document.querySelector("#addFav").style.display = "none"
+    
+}
+
+document.querySelector("#selectList").addEventListener("change", function (){
+
+if(document.querySelector("#selectList").value === "earth"){
+
+document.querySelector("#earthSelect").style.display = "block"
+document.querySelector("#camaraSelect").style.display = "block"
+document.querySelector("#solsSelect").style.display = "none"
+document.querySelector("#addFav").style.display = "none"
+}
+
+
+else if(document.querySelector("#selectList").value === "sols"){
+
+document.querySelector("#solsSelect").style.display = "block"
+document.querySelector("#camaraSelect").style.display = "block"
+document.querySelector("#earthSelect").style.display = "none"
+document.querySelector("#addFav").style.display = "none"
+}
+
+else{
+    document.querySelector("#earthSelect").style.display = "none"
+    document.querySelector("#solsSelect").style.display = "none"
+    document.querySelector("#camaraSelect").style.display = "none"
+    document.querySelector("#addFav").style.display = "none"}
+
+let radioCam = document.querySelectorAll("input[name='camara'")
+
+for (let i = 0; i < radioCam.length; i++) {
+    radioCam[i].addEventListener("change", function () {
+    document.querySelector("#confirm").style.display = "block"
+    document.querySelector("#addFav").style.display = "block"
+    })
+    
+}})
